@@ -3,11 +3,11 @@ package com.example.fanfarehub.Model;
 import java.sql.*;
 
 public class DBConnectionManager {
-    private static final String URL = "jdbc:postgresql://localhost:5432/webdb";
+    private static final String URL = "jdbc:postgresql://localhost:5432/fanfdb";
 
-    private static final String USER = "webuser";
+    private static final String USER = "fanfuser";
 
-    private static final String PASSWORD = "webuser";
+    private static final String PASSWORD = "fanfuser";
 
     private static DBConnectionManager instance;
 
