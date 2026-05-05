@@ -1,11 +1,13 @@
-package com.example.fanfarehub.Model;
+package com.example.fanfarehub.Model.DAO;
+
+import com.example.fanfarehub.Model.*;
+import com.example.fanfarehub.Model.POJO.*;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PupitreDAO {
-
     private final DBConnectionManager dbManager;
 
     public PupitreDAO(DBConnectionManager dbManager) {

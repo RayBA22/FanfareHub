@@ -1,4 +1,4 @@
-package com.example.fanfarehub.Model.DAO;
+package com.example.fanfarehub.Model;
 
 import java.sql.*;
 

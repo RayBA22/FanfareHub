@@ -1,23 +1,20 @@
-package com.example.fanfarehub.Model;
+package com.example.fanfarehub.Model.DAO;
+
+import com.example.fanfarehub.Model.*;
+import com.example.fanfarehub.Model.POJO.*;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InscriptionDAO {
-
+public class InscritDAO {
     private final DBConnectionManager dbManager;
 
-    public InscriptionDAO(DBConnectionManager dbManager) {
+    public InscritDAO(DBConnectionManager dbManager) {
         this.dbManager = dbManager;
     }
-
-    // -------------------------------------------------------------------------
-    // CREATE / UPDATE (upsert)
-    // -------------------------------------------------------------------------
-
-    // Inscrit un fanfaron à un événement ou met à jour son statut/instrument
-    public void upsert(Inscription i) throws SQLException {
+    
+    public void upsert(Inscrit i) throws SQLException {
         String sql = """
                 INSERT INTO INSCRIT (pseudo, nom, instrument, status)
                 VALUES (?, ?, ?, ?)
@@ -28,25 +25,20 @@ public class InscriptionDAO {
         try (Connection conn = dbManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, i.getPseudo());
-            ps.setString(2, i.getNomEvenement());
+            ps.setString(2, i.getNom());
             ps.setString(3, i.getInstrument());
             ps.setString(4, i.getStatus());
             ps.executeUpdate();
         }
     }
 
-    // -------------------------------------------------------------------------
-    // READ
-    // -------------------------------------------------------------------------
-
-    // Toutes les inscriptions pour un événement, triées par instrument puis statut
-    public List<Inscription> findByEvenement(String nomEvenement) throws SQLException {
+    public List<Inscrit> findByEvenement(String nomEvenement) throws SQLException {
         String sql = """
                 SELECT * FROM INSCRIT
                 WHERE nom = ?
                 ORDER BY instrument, status
                 """;
-        List<Inscription> list = new ArrayList<>();
+        List<Inscrit> list = new ArrayList<>();
         try (Connection conn = dbManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, nomEvenement);
@@ -56,8 +48,7 @@ public class InscriptionDAO {
         return list;
     }
 
-    // Inscription d'un fanfaron à un événement précis
-    public Inscription findByPseudoAndEvenement(String pseudo, String nomEvenement) throws SQLException {
+    public Inscrit findByPseudoAndEvenement(String pseudo, String nomEvenement) throws SQLException {
         String sql = "SELECT * FROM INSCRIT WHERE pseudo = ? AND nom = ?";
         try (Connection conn = dbManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -69,10 +60,6 @@ public class InscriptionDAO {
         return null;
     }
 
-    // -------------------------------------------------------------------------
-    // DELETE
-    // -------------------------------------------------------------------------
-
     public void delete(String pseudo, String nomEvenement) throws SQLException {
         String sql = "DELETE FROM INSCRIT WHERE pseudo = ? AND nom = ?";
         try (Connection conn = dbManager.getConnection();
@@ -83,12 +70,8 @@ public class InscriptionDAO {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // MAPPING ResultSet -> Inscription
-    // -------------------------------------------------------------------------
-
-    private Inscription map(ResultSet rs) throws SQLException {
-        return new Inscription(
+    private Inscrit map(ResultSet rs) throws SQLException {
+        return new Inscrit(
                 rs.getString("pseudo"),
                 rs.getString("nom"),
                 rs.getString("instrument"),

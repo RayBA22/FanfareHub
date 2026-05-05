@@ -1,20 +1,18 @@
 package com.example.fanfarehub.Model.DAO;
 
+import com.example.fanfarehub.Model.*;
+import com.example.fanfarehub.Model.POJO.*;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FanfaronDAO {
-
     private final DBConnectionManager dbManager;
 
     public FanfaronDAO(DBConnectionManager dbManager) {
         this.dbManager = dbManager;
     }
-
-    // -------------------------------------------------------------------------
-    // CREATE
-    // -------------------------------------------------------------------------
 
     public void create(String pseudo, String email, String mdpClair,
                        String prenom, String nom, String genre, String regime) throws SQLException {
@@ -34,10 +32,6 @@ public class FanfaronDAO {
             ps.executeUpdate();
         }
     }
-
-    // -------------------------------------------------------------------------
-    // READ
-    // -------------------------------------------------------------------------
 
     public Fanfaron findByPseudo(String pseudo) throws SQLException {
         String sql = "SELECT * FROM FANFARON WHERE pseudo = ?";
@@ -72,7 +66,6 @@ public class FanfaronDAO {
         return list;
     }
 
-    // Vérifie pseudo + mdp pour la connexion
     public Fanfaron login(String pseudo, String mdpClair) throws SQLException {
         String sql = "SELECT * FROM FANFARON WHERE pseudo = ? AND mdp = crypt(?, mdp)";
         try (Connection conn = dbManager.getConnection();
@@ -82,12 +75,8 @@ public class FanfaronDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) return map(rs);
         }
-        return null; // null = mauvais identifiants
+        return null;
     }
-
-    // -------------------------------------------------------------------------
-    // UPDATE
-    // -------------------------------------------------------------------------
 
     public void update(Fanfaron f) throws SQLException {
         String sql = """
@@ -127,10 +116,6 @@ public class FanfaronDAO {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // DELETE
-    // -------------------------------------------------------------------------
-
     public void delete(String pseudo) throws SQLException {
         String sql = "DELETE FROM FANFARON WHERE pseudo = ?";
         try (Connection conn = dbManager.getConnection();
@@ -139,10 +124,6 @@ public class FanfaronDAO {
             ps.executeUpdate();
         }
     }
-
-    // -------------------------------------------------------------------------
-    // EXISTS (pour les vérifications d'inscription)
-    // -------------------------------------------------------------------------
 
     public boolean pseudoExists(String pseudo) throws SQLException {
         String sql = "SELECT COUNT(*) FROM FANFARON WHERE pseudo = ?";
@@ -166,22 +147,17 @@ public class FanfaronDAO {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // MAPPING ResultSet -> Fanfaron
-    // -------------------------------------------------------------------------
-
     private Fanfaron map(ResultSet rs) throws SQLException {
-        Fanfaron f = new Fanfaron();
-        f.setPseudo(rs.getString("pseudo"));
-        f.setEmail(rs.getString("email"));
-        f.setMdp(rs.getBytes("mdp"));
-        f.setPrenom(rs.getString("prenom"));
-        f.setNom(rs.getString("nom"));
-        f.setGenre(rs.getString("genre"));
-        f.setRegime(rs.getString("regime"));
-        f.setDateCreation(rs.getDate("date_creation"));
-        f.setDateConnexion(rs.getDate("date_connexion"));
-        f.setRole(rs.getString("role"));
+        Fanfaron f = new Fanfaron(rs.getString("pseudo"),
+                rs.getString("email"),
+                rs.getString("mdp"),
+                rs.getString("prenom"),
+                rs.getString("nom"),
+                rs.getString("genre"),
+                rs.getString("regime"),
+                rs.getDate("date_creation"),
+                rs.getDate("date_connexion"),
+                rs.getString("role"));
         return f;
     }
 }

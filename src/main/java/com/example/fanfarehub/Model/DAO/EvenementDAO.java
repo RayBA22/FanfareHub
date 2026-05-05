@@ -1,20 +1,18 @@
-package com.example.fanfarehub.Model;
+package com.example.fanfarehub.Model.DAO;
+
+import com.example.fanfarehub.Model.*;
+import com.example.fanfarehub.Model.POJO.*;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EvenementDAO {
-
     private final DBConnectionManager dbManager;
 
     public EvenementDAO(DBConnectionManager dbManager) {
         this.dbManager = dbManager;
     }
-
-    // -------------------------------------------------------------------------
-    // CREATE
-    // -------------------------------------------------------------------------
 
     public void create(Evenement e) throws SQLException {
         String sql = """
@@ -33,10 +31,6 @@ public class EvenementDAO {
             ps.executeUpdate();
         }
     }
-
-    // -------------------------------------------------------------------------
-    // READ
-    // -------------------------------------------------------------------------
 
     public Evenement findByNom(String nom) throws SQLException {
         String sql = "SELECT * FROM EVENEMENT WHERE nom = ?";
@@ -72,10 +66,6 @@ public class EvenementDAO {
         return list;
     }
 
-    // -------------------------------------------------------------------------
-    // UPDATE
-    // -------------------------------------------------------------------------
-
     public void update(Evenement e) throws SQLException {
         String sql = """
                 UPDATE EVENEMENT
@@ -94,10 +84,6 @@ public class EvenementDAO {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // DELETE
-    // -------------------------------------------------------------------------
-
     public void delete(String nom) throws SQLException {
         String sql = "DELETE FROM EVENEMENT WHERE nom = ?";
         try (Connection conn = dbManager.getConnection();
@@ -107,19 +93,14 @@ public class EvenementDAO {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // MAPPING ResultSet -> Evenement
-    // -------------------------------------------------------------------------
-
     private Evenement map(ResultSet rs) throws SQLException {
-        Evenement e = new Evenement();
-        e.setNom(rs.getString("nom"));
-        e.setType(rs.getString("type"));
-        e.setDate(rs.getDate("date"));
-        e.setDuree(rs.getString("duree"));
-        e.setLieu(rs.getString("lieu"));
-        e.setDescription(rs.getString("description"));
-        e.setPseudo(rs.getString("pseudo"));
+        Evenement e = new Evenement(rs.getString("nom"),
+                rs.getString("type"),
+                rs.getDate("date"),
+                rs.getString("duree"),
+                rs.getString("lieu"),
+                rs.getString("description"),
+                rs.getString("pseudo"));
         return e;
     }
 }

@@ -1,11 +1,12 @@
-package com.example.fanfarehub.Model;
+package com.example.fanfarehub.Model.DAO;
+
+import com.example.fanfarehub.Model.*;
+import com.example.fanfarehub.Model.POJO.*;
 
 import java.sql.*;
 import java.util.List;
 
-// Table PARTICIPE : relation N-N entre Fanfaron et Commission
 public class ParticipeDAO {
-
     private final DBConnectionManager dbManager;
 
     public ParticipeDAO(DBConnectionManager dbManager) {

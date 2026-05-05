@@ -1,4 +1,6 @@
-package com.example.fanfarehub.Model.DAO;
+package com.example.fanfarehub.Model;
+
+import com.example.fanfarehub.Model.DAO.*;
 
 public class DAOFactory {
 
@@ -12,16 +14,16 @@ public class DAOFactory {
         return new EvenementDAO(dbManager);
     }
 
-    public static CommissionDAO getCommissionDAO() {
-        return new CommissionDAO(dbManager);
+    public static ComissionDAO getCommissionDAO() {
+        return new ComissionDAO(dbManager);
     }
 
     public static PupitreDAO getPupitreDAO() {
         return new PupitreDAO(dbManager);
     }
 
-    public static InscriptionDAO getInscriptionDAO() {
-        return new InscriptionDAO(dbManager);
+    public static InscritDAO getInscriptionDAO() {
+        return new InscritDAO(dbManager);
     }
 
     public static JoueDAO getJoueDAO() {

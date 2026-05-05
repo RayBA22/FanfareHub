@@ -1,12 +1,11 @@
-package model;
+package com.example.fanfarehub.Model.POJO;
 
 import java.util.Date;
 
 public class Fanfaron {
-
     private String pseudo;
     private String email;
-    private byte[] mdp;
+    private String mdp;
     private String prenom;
     private String nom;
     private String genre;
@@ -15,11 +14,7 @@ public class Fanfaron {
     private Date dateConnexion;
     private String role;
 
-    public Fanfaron() {}
-
-    public Fanfaron(String pseudo, String email, byte[] mdp, String prenom,
-                    String nom, String genre, String regime,
-                    Date dateCreation, Date dateConnexion, String role) {
+    public Fanfaron(String pseudo, String email, String mdp, String prenom, String nom, String genre, String regime, Date dateCreation, Date dateConnexion, String role) {
         this.pseudo = pseudo;
         this.email = email;
         this.mdp = mdp;
@@ -32,33 +27,83 @@ public class Fanfaron {
         this.role = role;
     }
 
-    public String getPseudo()             { return pseudo; }
-    public void setPseudo(String pseudo)  { this.pseudo = pseudo; }
+    public String getPseudo() {
+        return pseudo;
+    }
 
-    public String getEmail()              { return email; }
-    public void setEmail(String email)    { this.email = email; }
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
 
-    public byte[] getMdp()               { return mdp; }
-    public void setMdp(byte[] mdp)       { this.mdp = mdp; }
+    public String getEmail() {
+        return email;
+    }
 
-    public String getPrenom()             { return prenom; }
-    public void setPrenom(String prenom)  { this.prenom = prenom; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public String getNom()                { return nom; }
-    public void setNom(String nom)        { this.nom = nom; }
+    public String getMdp() {
+        return mdp;
+    }
 
-    public String getGenre()              { return genre; }
-    public void setGenre(String genre)    { this.genre = genre; }
+    public void setMdp(String mdp) {
+        this.mdp = mdp;
+    }
 
-    public String getRegime()             { return regime; }
-    public void setRegime(String regime)  { this.regime = regime; }
+    public String getPrenom() {
+        return prenom;
+    }
 
-    public Date getDateCreation()                    { return dateCreation; }
-    public void setDateCreation(Date dateCreation)   { this.dateCreation = dateCreation; }
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
 
-    public Date getDateConnexion()                   { return dateConnexion; }
-    public void setDateConnexion(Date dateConnexion) { this.dateConnexion = dateConnexion; }
+    public String getNom() {
+        return nom;
+    }
 
-    public String getRole()               { return role; }
-    public void setRole(String role)      { this.role = role; }
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getRegime() {
+        return regime;
+    }
+
+    public void setRegime(String regime) {
+        this.regime = regime;
+    }
+
+    public Date getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(Date dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public Date getDateConnexion() {
+        return dateConnexion;
+    }
+
+    public void setDateConnexion(Date dateConnexion) {
+        this.dateConnexion = dateConnexion;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

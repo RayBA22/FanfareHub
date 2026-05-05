@@ -1,20 +1,27 @@
-package model;
+package com.example.fanfarehub.Model.POJO;
 
 public class Participe {
+    private String pseudo;
+    private String nom;
 
-    private String pseudo;         // FK -> Fanfaron
-    private String nomCommission;  // FK -> Commission
-
-    public Participe() {}
-
-    public Participe(String pseudo, String nomCommission) {
+    public Participe(String pseudo, String nom) {
         this.pseudo = pseudo;
-        this.nomCommission = nomCommission;
+        this.nom = nom;
     }
 
-    public String getPseudo()                    { return pseudo; }
-    public void setPseudo(String pseudo)         { this.pseudo = pseudo; }
+    public String getPseudo() {
+        return pseudo;
+    }
 
-    public String getNomCommission()                       { return nomCommission; }
-    public void setNomCommission(String nomCommission)     { this.nomCommission = nomCommission; }
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 }
