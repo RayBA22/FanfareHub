@@ -11,26 +11,48 @@
 <body class="auth-page">
 <main class="auth-container wide">
     <h1 class="auth-title">FanfareHub</h1>
-    <h2>Creer un compte</h2>
+    <h2>Créer un compte</h2>
 
     <% if (request.getAttribute("error") != null) { %>
     <div class="alert alert-error">${error}</div>
     <% } %>
 
     <form method="post" action="${pageContext.request.contextPath}/inscription">
+
+        <%-- Identifiant unique --%>
+        <div class="form-group">
+            <label for="pseudo">Nom de fanfaron *<span class="field-hint"> (identifiant de connexion)</span></label>
+            <input type="text" id="pseudo" name="pseudo" required>
+        </div>
+
+        <%-- Email saisi deux fois --%>
         <div class="form-row">
             <div class="form-group">
-                <label for="pseudo">Pseudo *</label>
-                <input type="text" id="pseudo" name="pseudo" required>
+                <label for="email">Adresse email *</label>
+                <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email">
+                <label for="emailConfirm">Confirmer l'adresse email *</label>
+                <input type="email" id="emailConfirm" name="emailConfirm" required>
             </div>
         </div>
+
+        <%-- Mot de passe saisi deux fois --%>
         <div class="form-row">
             <div class="form-group">
-                <label for="prenom">Prenom</label>
+                <label for="mdp">Mot de passe *</label>
+                <input type="password" id="mdp" name="mdp" required>
+            </div>
+            <div class="form-group">
+                <label for="mdpConfirm">Confirmer le mot de passe *</label>
+                <input type="password" id="mdpConfirm" name="mdpConfirm" required>
+            </div>
+        </div>
+
+        <%-- Prénom et Nom --%>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="prenom">Prénom</label>
                 <input type="text" id="prenom" name="prenom">
             </div>
             <div class="form-group">
@@ -38,37 +60,38 @@
                 <input type="text" id="nom" name="nom">
             </div>
         </div>
+
+        <%-- Genre --%>
         <div class="form-row">
             <div class="form-group">
                 <label for="genre">Genre</label>
                 <select id="genre" name="genre">
-                    <option value="">-- Selectioner --</option>
+                    <option value="">-- Sélectionner --</option>
                     <option value="homme">Homme</option>
                     <option value="femme">Femme</option>
                     <option value="autre">Autre</option>
                 </select>
             </div>
+
+            <%-- Contraintes alimentaires --%>
             <div class="form-group">
-                <label for="regime">Regime</label>
-                <select id="regime" name="regime">
-                    <option value="">-- Selectioner --</option>
-                    <option value="actif">Actif</option>
-                    <option value="inactif">Inactif</option>
-                    <option value="honoraire">Honoraire</option>
+                <label for="contrainteAlimentaire">Contraintes alimentaires</label>
+                <select id="contrainteAlimentaire" name="contrainteAlimentaire">
+                    <option value="aucune">Aucune</option>
+                    <option value="vegetarien">Végétarien</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="sans_porc">Sans porc</option>
                 </select>
             </div>
         </div>
-        <div class="form-group">
-            <label for="mdp">Mot de passe *</label>
-            <input type="password" id="mdp" name="mdp" required>
-        </div>
 
+        <%-- Instruments --%>
         <%
             List<Pupitre> pupitres = (List<Pupitre>) request.getAttribute("pupitres");
             if (pupitres != null && !pupitres.isEmpty()) {
         %>
         <div class="form-group">
-            <label>Instruments joues</label>
+            <label>Instruments joués</label>
             <div class="checkbox-grid">
                 <% for (Pupitre p : pupitres) { %>
                 <label class="checkbox-label">
@@ -80,6 +103,7 @@
         </div>
         <% } %>
 
+        <%-- Commissions --%>
         <%
             List<Comission> commissions = (List<Comission>) request.getAttribute("commissions");
             if (commissions != null && !commissions.isEmpty()) {
@@ -97,9 +121,9 @@
         </div>
         <% } %>
 
-        <button type="submit" class="btn btn-primary btn-full">Creer le compte</button>
+        <button type="submit" class="btn btn-primary btn-full">Créer le compte</button>
     </form>
-    <p class="auth-link">Deja un compte ? <a href="${pageContext.request.contextPath}/login">Se connecter</a></p>
+    <p class="auth-link">Déjà un compte ? <a href="${pageContext.request.contextPath}/login">Se connecter</a></p>
 </main>
 </body>
 </html>

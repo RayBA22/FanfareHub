@@ -17,9 +17,9 @@ public class FanfaronDAO {
     public void create(String pseudo, String email, String mdpClair,
                        String prenom, String nom, String genre, String regime) throws SQLException {
         String sql = """
-                INSERT INTO FANFARON (pseudo, email, mdp, prenom, nom, genre, regime, date_creation, role)
-                VALUES (?, ?, crypt(?, gen_salt('bf')), ?, ?, ?, ?, NOW(), 'fanfaron')
-                """;
+        INSERT INTO FANFARON (pseudo, email, mdp, prenom, nom, genre, regime, date_creation, role)
+        VALUES (?, ?, digest(?, 'sha256'), ?, ?, ?, ?, NOW(), 'fanfaron')
+        """;
         try (Connection conn = dbManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, pseudo);
@@ -67,7 +67,7 @@ public class FanfaronDAO {
     }
 
     public Fanfaron login(String pseudo, String mdpClair) throws SQLException {
-        String sql = "SELECT * FROM FANFARON WHERE pseudo = ? AND mdp = crypt(?, mdp)";
+        String sql = "SELECT * FROM FANFARON WHERE pseudo = ? AND mdp = digest(?, 'sha256')";
         try (Connection conn = dbManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, pseudo);
@@ -98,7 +98,7 @@ public class FanfaronDAO {
     }
 
     public void updateMotDePasse(String pseudo, String mdpClair) throws SQLException {
-        String sql = "UPDATE FANFARON SET mdp = crypt(?, gen_salt('bf')) WHERE pseudo = ?";
+        String sql = "UPDATE FANFARON SET mdp = digest(?, 'sha256') WHERE pseudo = ?";
         try (Connection conn = dbManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, mdpClair);

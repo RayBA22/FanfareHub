@@ -19,61 +19,65 @@
 <% } %>
 
 <div class="card form-card">
-<form method="post" action="${pageContext.request.contextPath}/evenement/gestion">
-    <input type="hidden" name="action" value="<%= action %>">
-    <% if (isEdit && ev != null) { %>
-    <input type="hidden" name="nom" value="<%= ev.getNom() %>">
-    <% } %>
+    <form method="post" action="${pageContext.request.contextPath}/evenement/gestion">
+        <input type="hidden" name="action" value="<%= action %>">
+        <% if (isEdit && ev != null) { %>
+        <input type="hidden" name="nom" value="<%= ev.getNom() %>">
+        <% } %>
 
-    <% if (!isEdit) { %>
-    <div class="form-group">
-        <label for="nom">Nom *</label>
-        <input type="text" id="nom" name="nom" required value="<%= ev != null ? ev.getNom() : "" %>">
-    </div>
-    <% } else { %>
-    <div class="form-group">
-        <label>Nom</label>
-        <input type="text" value="<%= ev.getNom() %>" disabled class="input-disabled">
-    </div>
-    <% } %>
-
-    <div class="form-row">
+        <% if (!isEdit) { %>
         <div class="form-group">
-            <label for="type">Type</label>
-            <input type="text" id="type" name="type" placeholder="concert, repetition..."
-                   value="<%= ev != null && ev.getType() != null ? ev.getType() : "" %>">
+            <label for="nom">Nom *</label>
+            <input type="text" id="nom" name="nom" required value="<%= ev != null ? ev.getNom() : "" %>">
         </div>
+        <% } else { %>
         <div class="form-group">
-            <label for="date">Date</label>
-            <input type="date" id="date" name="date"
-                   value="<%= ev != null && ev.getDate() != null ? sdf.format(ev.getDate()) : "" %>">
+            <label>Nom</label>
+            <input type="text" value="<%= ev.getNom() %>" disabled class="input-disabled">
         </div>
-    </div>
+        <% } %>
 
-    <div class="form-row">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="type">Type</label>
+                <select id="type" name="type">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="atelier"    <%= ev != null && "atelier".equals(ev.getType())    ? "selected" : "" %>>Atelier</option>
+                    <option value="repetition" <%= ev != null && "repetition".equals(ev.getType()) ? "selected" : "" %>>Répétition</option>
+                    <option value="prestation" <%= ev != null && "prestation".equals(ev.getType()) ? "selected" : "" %>>Prestation</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date"
+                       value="<%= ev != null && ev.getDate() != null ? sdf.format(ev.getDate()) : "" %>">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="duree">Duree</label>
+                <input type="text" id="duree" name="duree" placeholder="ex: 2h30"
+                       value="<%= ev != null && ev.getDuree() != null ? ev.getDuree() : "" %>">
+            </div>
+            <div class="form-group">
+                <label for="lieu">Lieu</label>
+                <input type="text" id="lieu" name="lieu"
+                       value="<%= ev != null && ev.getLieu() != null ? ev.getLieu() : "" %>">
+            </div>
+        </div>
+
         <div class="form-group">
-            <label for="duree">Duree</label>
-            <input type="text" id="duree" name="duree" placeholder="ex: 2h30"
-                   value="<%= ev != null && ev.getDuree() != null ? ev.getDuree() : "" %>">
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description"
+                   value="<%= ev != null && ev.getDescription() != null ? ev.getDescription() : "" %>">
         </div>
-        <div class="form-group">
-            <label for="lieu">Lieu</label>
-            <input type="text" id="lieu" name="lieu"
-                   value="<%= ev != null && ev.getLieu() != null ? ev.getLieu() : "" %>">
+
+        <div class="form-actions">
+            <a href="${pageContext.request.contextPath}/evenements" class="btn btn-secondary">Annuler</a>
+            <button type="submit" class="btn btn-primary"><%= isEdit ? "Enregistrer" : "Creer" %></button>
         </div>
-    </div>
-
-    <div class="form-group">
-        <label for="description">Description</label>
-        <input type="text" id="description" name="description"
-               value="<%= ev != null && ev.getDescription() != null ? ev.getDescription() : "" %>">
-    </div>
-
-    <div class="form-actions">
-        <a href="${pageContext.request.contextPath}/evenements" class="btn btn-secondary">Annuler</a>
-        <button type="submit" class="btn btn-primary"><%= isEdit ? "Enregistrer" : "Creer" %></button>
-    </div>
-</form>
+    </form>
 </div>
 
 <%@ include file="fragments/footer.jsp" %>

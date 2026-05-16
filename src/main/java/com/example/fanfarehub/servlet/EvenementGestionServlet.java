@@ -10,17 +10,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Gérer les événements : ajouter / modifier / supprimer.
- * Accessible uniquement aux rôles "commission" et "admin".
- */
 @WebServlet("/evenement/gestion")
 public class EvenementGestionServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        if (!hasAccess(req)) { resp.sendError(HttpServletResponse.SC_FORBIDDEN); return; }
+        if (!isAdminOrPrestation(req)) { resp.sendError(HttpServletResponse.SC_FORBIDDEN); return; }
 
         String action = req.getParameter("action");
         if ("modifier".equals(action)) {
@@ -46,7 +42,7 @@ public class EvenementGestionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        if (!hasAccess(req)) { resp.sendError(HttpServletResponse.SC_FORBIDDEN); return; }
+        if (!isAdminOrPrestation(req)) { resp.sendError(HttpServletResponse.SC_FORBIDDEN); return; }
         req.setCharacterEncoding("UTF-8");
 
         String action = req.getParameter("action");
@@ -55,7 +51,6 @@ public class EvenementGestionServlet extends HttpServlet {
         try {
             if ("supprimer".equals(action)) {
                 String nom = req.getParameter("nom");
-                // Supprimer d'abord les inscriptions (contrainte FK)
                 List<Inscrit> inscrits = DAOFactory.getInscriptionDAO().findByEvenement(nom);
                 for (Inscrit i : inscrits) {
                     DAOFactory.getInscriptionDAO().delete(i.getPseudo(), nom);
@@ -117,11 +112,20 @@ public class EvenementGestionServlet extends HttpServlet {
         }
     }
 
-    private boolean hasAccess(HttpServletRequest req) {
+    // SQLException absorbée ici : doGet/doPost ne la déclarent pas → plus d'UnhandledException
+    private boolean isAdminOrPrestation(HttpServletRequest req) {
         Fanfaron user = (Fanfaron) req.getSession().getAttribute("user");
         if (user == null) return false;
-        String role = user.getRole();
-        return "admin".equals(role) || "commission".equals(role);
+        if ("admin".equals(user.getRole())) return true;
+        try {
+            List<Comission> commissions = DAOFactory.getCommissionDAO().findByPseudo(user.getPseudo());
+            for (Comission c : commissions) {
+                if ("Prestation".equals(c.getNom())) return true;
+            }
+        } catch (SQLException e) {
+            return false; // erreur base = accès refusé par sécurité
+        }
+        return false;
     }
 
     private String encodeUrl(String value) {

@@ -2,8 +2,9 @@
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%
     com.example.fanfarehub.Model.POJO.Fanfaron navUser =
-        (com.example.fanfarehub.Model.POJO.Fanfaron) session.getAttribute("user");
+            (com.example.fanfarehub.Model.POJO.Fanfaron) session.getAttribute("user");
     String role = (navUser != null) ? navUser.getRole() : "";
+    boolean canManageEvents = Boolean.TRUE.equals(session.getAttribute("canManageEvents"));
 %>
 <!DOCTYPE html>
 <html lang="fr">
@@ -14,13 +15,13 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
-<% if (navUser != null) { %>
+    <% if (navUser != null) { %>
 <nav class="navbar">
     <a href="${pageContext.request.contextPath}/accueil" class="navbar-brand">FanfareHub</a>
     <div class="navbar-links">
         <a href="${pageContext.request.contextPath}/evenements">Evenements</a>
         <a href="${pageContext.request.contextPath}/options">Mes options</a>
-        <% if ("commission".equals(role) || "admin".equals(role)) { %>
+        <% if (canManageEvents) { %>
         <a href="${pageContext.request.contextPath}/evenement/gestion?action=ajouter">+ Evenement</a>
         <% } %>
         <% if ("admin".equals(role)) { %>
@@ -29,5 +30,5 @@
         <a href="${pageContext.request.contextPath}/logout" class="btn-logout">Deconnexion</a>
     </div>
 </nav>
-<% } %>
+    <% } %>
 <main class="container">

@@ -70,6 +70,26 @@ public class InscritDAO {
         }
     }
 
+    public void deleteAllByPseudo(String pseudo) throws SQLException {
+
+        String sql = """
+            DELETE FROM INSCRIT
+            WHERE nom IN (
+                SELECT nom
+                FROM EVENEMENT
+                WHERE pseudo = ?
+            )
+            """;
+
+        try (Connection conn = dbManager.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, pseudo);
+
+            ps.executeUpdate();
+        }
+    }
+
     private Inscrit map(ResultSet rs) throws SQLException {
         return new Inscrit(
                 rs.getString("pseudo"),

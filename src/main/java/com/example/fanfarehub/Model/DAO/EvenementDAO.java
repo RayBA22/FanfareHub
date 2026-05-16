@@ -93,6 +93,19 @@ public class EvenementDAO {
         }
     }
 
+    public void deleteAllByPseudo(String pseudo) throws SQLException {
+
+        String sql = "DELETE FROM EVENEMENT WHERE pseudo = ?";
+
+        try (Connection conn = dbManager.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, pseudo);
+
+            ps.executeUpdate();
+        }
+    }
+
     private Evenement map(ResultSet rs) throws SQLException {
         Evenement e = new Evenement(rs.getString("nom"),
                 rs.getString("type"),

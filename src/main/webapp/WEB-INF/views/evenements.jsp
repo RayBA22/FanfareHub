@@ -7,12 +7,12 @@
     List<Evenement> evenements = (List<Evenement>) request.getAttribute("evenements");
     String filtreType = (String) request.getAttribute("filtreType");
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    String role = ((Fanfaron) session.getAttribute("user")).getRole();
+    boolean canManage = Boolean.TRUE.equals(request.getAttribute("canManage"));
 %>
 
 <div class="page-header">
     <h1>Evenements</h1>
-    <% if ("commission".equals(role) || "admin".equals(role)) { %>
+    <% if (canManage) { %>
     <a href="${pageContext.request.contextPath}/evenement/gestion?action=ajouter" class="btn btn-primary">+ Ajouter</a>
     <% } %>
 </div>
@@ -29,32 +29,32 @@
 <% if (evenements != null && !evenements.isEmpty()) { %>
 <table class="table">
     <thead>
-        <tr>
-            <th>Nom</th><th>Type</th><th>Date</th><th>Duree</th><th>Lieu</th><th>Actions</th>
-        </tr>
+    <tr>
+        <th>Nom</th><th>Type</th><th>Date</th><th>Duree</th><th>Lieu</th><th>Actions</th>
+    </tr>
     </thead>
     <tbody>
-        <% for (Evenement e : evenements) { %>
-        <tr>
-            <td><a href="${pageContext.request.contextPath}/evenement?nom=<%= java.net.URLEncoder.encode(e.getNom(), "UTF-8") %>"><%= e.getNom() %></a></td>
-            <td><%= e.getType() != null ? e.getType() : "-" %></td>
-            <td><%= e.getDate() != null ? sdf.format(e.getDate()) : "-" %></td>
-            <td><%= e.getDuree() != null ? e.getDuree() : "-" %></td>
-            <td><%= e.getLieu() != null ? e.getLieu() : "-" %></td>
-            <td>
-                <a href="${pageContext.request.contextPath}/evenement?nom=<%= java.net.URLEncoder.encode(e.getNom(), "UTF-8") %>" class="btn btn-sm btn-secondary">Voir</a>
-                <% if ("commission".equals(role) || "admin".equals(role)) { %>
-                <a href="${pageContext.request.contextPath}/evenement/gestion?action=modifier&nom=<%= java.net.URLEncoder.encode(e.getNom(), "UTF-8") %>" class="btn btn-sm btn-warning">Modifier</a>
-                <form method="post" action="${pageContext.request.contextPath}/evenement/gestion" style="display:inline"
-                      onsubmit="return confirm('Supprimer cet evenement ?')">
-                    <input type="hidden" name="action" value="supprimer">
-                    <input type="hidden" name="nom" value="<%= e.getNom() %>">
-                    <button type="submit" class="btn btn-sm btn-danger">Supprimer</button>
-                </form>
-                <% } %>
-            </td>
-        </tr>
-        <% } %>
+    <% for (Evenement e : evenements) { %>
+    <tr>
+        <td><a href="${pageContext.request.contextPath}/evenement?nom=<%= java.net.URLEncoder.encode(e.getNom(), "UTF-8") %>"><%= e.getNom() %></a></td>
+        <td><%= e.getType()  != null ? e.getType()  : "-" %></td>
+        <td><%= e.getDate()  != null ? sdf.format(e.getDate()) : "-" %></td>
+        <td><%= e.getDuree() != null ? e.getDuree() : "-" %></td>
+        <td><%= e.getLieu()  != null ? e.getLieu()  : "-" %></td>
+        <td>
+            <a href="${pageContext.request.contextPath}/evenement?nom=<%= java.net.URLEncoder.encode(e.getNom(), "UTF-8") %>" class="btn btn-sm btn-secondary">Voir</a>
+            <% if (canManage) { %>
+            <a href="${pageContext.request.contextPath}/evenement/gestion?action=modifier&nom=<%= java.net.URLEncoder.encode(e.getNom(), "UTF-8") %>" class="btn btn-sm btn-warning">Modifier</a>
+            <form method="post" action="${pageContext.request.contextPath}/evenement/gestion" style="display:inline"
+                  onsubmit="return confirm('Supprimer cet evenement ?')">
+                <input type="hidden" name="action" value="supprimer">
+                <input type="hidden" name="nom" value="<%= e.getNom() %>">
+                <button type="submit" class="btn btn-sm btn-danger">Supprimer</button>
+            </form>
+            <% } %>
+        </td>
+    </tr>
+    <% } %>
     </tbody>
 </table>
 <% } else { %>

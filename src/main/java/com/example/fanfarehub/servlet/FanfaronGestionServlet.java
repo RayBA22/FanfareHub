@@ -10,11 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
-/**
- * Gestion d'un fanfaron (admin) : ajouter / modifier / supprimer.
- */
 @WebServlet("/fanfaron/gestion")
 public class FanfaronGestionServlet extends HttpServlet {
 
@@ -60,22 +56,42 @@ public class FanfaronGestionServlet extends HttpServlet {
         try {
             if ("supprimer".equals(action)) {
                 String pseudo = req.getParameter("pseudo");
-                // Supprimer d'abord les tables dépendantes sans contrainte croisée
                 DAOFactory.getJoueDAO().replaceAll(pseudo, Collections.emptyList());
                 DAOFactory.getParticipeDAO().replaceAll(pseudo, Collections.emptyList());
-                // Tenter la suppression (échouera si le fanfaron a des événements ou inscriptions)
+                DAOFactory.getInscriptionDAO().deleteAllByPseudo(pseudo);
+                DAOFactory.getEvenementDAO().deleteAllByPseudo(pseudo);
                 DAOFactory.getFanfaronDAO().delete(pseudo);
                 resp.sendRedirect(req.getContextPath() + "/fanfarons");
 
             } else if ("modifier".equals(action)) {
-                String pseudo  = req.getParameter("pseudo");
-                String email   = req.getParameter("email");
-                String prenom  = req.getParameter("prenom");
-                String nom     = req.getParameter("nom");
-                String genre   = req.getParameter("genre");
-                String regime  = req.getParameter("regime");
-                String role    = req.getParameter("role");
+                String pseudo     = req.getParameter("pseudo");
+                String email      = req.getParameter("email");
+                String prenom     = req.getParameter("prenom");
+                String nom        = req.getParameter("nom");
+                String genre      = req.getParameter("genre");
+                String regime     = req.getParameter("regime");
+                String role       = req.getParameter("role");
+                String mdp        = req.getParameter("mdp");
+                String mdpConfirm = req.getParameter("mdpConfirm");
 
+                // Confirmaton
+                if (mdp != null && !mdp.isBlank()) {
+                    if (!mdp.equals(mdpConfirm)) {
+                        req.setAttribute("error", "Les deux mots de passe ne correspondent pas.");
+                        req.setAttribute("action", "modifier");
+                        req.setAttribute("fanfaron",       DAOFactory.getFanfaronDAO().findByPseudo(pseudo));
+                        req.setAttribute("pupitres",       DAOFactory.getPupitreDAO().findAll());
+                        req.setAttribute("commissions",    DAOFactory.getCommissionDAO().findAll());
+                        req.setAttribute("mesPupitres",    DAOFactory.getPupitreDAO().findByPseudo(pseudo));
+                        req.setAttribute("mesCommissions", DAOFactory.getCommissionDAO().findByPseudo(pseudo));
+                        req.getRequestDispatcher("/WEB-INF/views/fanfaron-form.jsp").forward(req, resp);
+                        return;
+                    }
+                    // Mise à jour du mot de passe uniquement si un nouveau est fourni
+                    DAOFactory.getFanfaronDAO().updateMotDePasse(pseudo, mdp);
+                }
+
+                // ── Mise à jour des informations du fanfaron ──────────────────
                 Fanfaron f = DAOFactory.getFanfaronDAO().findByPseudo(pseudo);
                 if (f == null) {
                     req.setAttribute("message", "Fanfaron introuvable.");
@@ -90,7 +106,7 @@ public class FanfaronGestionServlet extends HttpServlet {
                 f.setRole(role != null ? role : "fanfaron");
                 DAOFactory.getFanfaronDAO().update(f);
 
-                // Mettre à jour instruments et commissions
+                // ── Mise à jour instruments et commissions ────────────────────
                 String[] instrumentsArr = req.getParameterValues("instruments");
                 String[] commissionsArr = req.getParameterValues("commissions");
                 DAOFactory.getJoueDAO().replaceAll(pseudo,
@@ -121,7 +137,6 @@ public class FanfaronGestionServlet extends HttpServlet {
 
                 DAOFactory.getFanfaronDAO().create(pseudo, email, mdp, prenom, nom, genre, regime);
 
-                // Appliquer le rôle si différent de 'fanfaron'
                 if (role != null && !role.equals("fanfaron")) {
                     Fanfaron f = DAOFactory.getFanfaronDAO().findByPseudo(pseudo);
                     f.setRole(role);
@@ -130,12 +145,11 @@ public class FanfaronGestionServlet extends HttpServlet {
 
                 String[] instrumentsArr = req.getParameterValues("instruments");
                 String[] commissionsArr = req.getParameterValues("commissions");
-                if (instrumentsArr != null) {
+                if (instrumentsArr != null)
                     DAOFactory.getJoueDAO().replaceAll(pseudo, Arrays.asList(instrumentsArr));
-                }
-                if (commissionsArr != null) {
+                if (commissionsArr != null)
                     DAOFactory.getParticipeDAO().replaceAll(pseudo, Arrays.asList(commissionsArr));
-                }
+
                 resp.sendRedirect(req.getContextPath() + "/fanfarons");
             }
 

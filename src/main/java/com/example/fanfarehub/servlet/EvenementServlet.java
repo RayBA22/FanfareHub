@@ -8,6 +8,7 @@ import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet("/evenement")
 public class EvenementServlet extends HttpServlet {
@@ -40,4 +41,6 @@ public class EvenementServlet extends HttpServlet {
         }
         req.getRequestDispatcher("/WEB-INF/views/evenement.jsp").forward(req, resp);
     }
+
+
 }
