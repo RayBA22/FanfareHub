@@ -1,3 +1,8 @@
+/*
+ * Controleur de liste des evenements.
+ * Il applique un filtre optionnel par type, calcule le droit de gestion
+ * de l'utilisateur courant et affiche la liste correspondante.
+ */
 package com.example.fanfarehub.servlet;
 
 import com.example.fanfarehub.Model.DAOFactory;

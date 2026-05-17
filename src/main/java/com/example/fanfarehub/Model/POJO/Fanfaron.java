@@ -1,3 +1,8 @@
+/*
+ * Modele d'un membre de la fanfare.
+ * Il conserve les informations de compte, de profil, de dates de suivi
+ * et de role utilisees par l'authentification et les ecrans de gestion.
+ */
 package com.example.fanfarehub.Model.POJO;
 
 import java.util.Date;

@@ -1,3 +1,8 @@
+<%--
+  Vue d'administration des fanfarons.
+  Elle liste les membres avec leurs informations principales
+  et propose les actions de modification ou suppression.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.example.fanfarehub.Model.POJO.Fanfaron,java.util.List,java.text.SimpleDateFormat" %>
 <% request.setAttribute("pageTitle", "Gestion des fanfarons"); %>

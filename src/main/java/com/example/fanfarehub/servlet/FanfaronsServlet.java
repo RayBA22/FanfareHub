@@ -1,3 +1,8 @@
+/*
+ * Controleur de la liste des fanfarons.
+ * Il limite l'acces aux administrateurs, charge tous les membres
+ * et transmet la liste a la vue de gestion.
+ */
 package com.example.fanfarehub.servlet;
 
 import com.example.fanfarehub.Model.DAOFactory;

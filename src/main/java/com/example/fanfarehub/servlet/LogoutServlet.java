@@ -1,3 +1,8 @@
+/*
+ * Controleur de deconnexion.
+ * Il invalide la session courante lorsqu'elle existe, puis redirige
+ * l'utilisateur vers la page de connexion.
+ */
 package com.example.fanfarehub.servlet;
 
 import jakarta.servlet.ServletException;

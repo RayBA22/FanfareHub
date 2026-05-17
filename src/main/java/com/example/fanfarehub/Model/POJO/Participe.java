@@ -1,3 +1,7 @@
+/*
+ * Modele d'association entre un fanfaron et une commission.
+ * Il represente l'appartenance d'un membre a un groupe ou une mission interne.
+ */
 package com.example.fanfarehub.Model.POJO;
 
 public class Participe {

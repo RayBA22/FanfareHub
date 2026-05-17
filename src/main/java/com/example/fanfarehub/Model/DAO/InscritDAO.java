@@ -1,3 +1,8 @@
+/*
+ * DAO des inscriptions aux evenements.
+ * Il ajoute ou met a jour une inscription, liste les participants,
+ * retrouve l'inscription d'un membre et supprime les inscriptions concernees.
+ */
 package com.example.fanfarehub.Model.DAO;
 
 import com.example.fanfarehub.Model.*;

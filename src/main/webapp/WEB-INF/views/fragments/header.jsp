@@ -1,3 +1,8 @@
+<%--
+  Fragment d'en-tete commun.
+  Il prepare la page HTML, charge la feuille de style et affiche la navigation
+  adaptee a l'utilisateur connecte et a ses droits.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <%

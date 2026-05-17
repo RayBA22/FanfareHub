@@ -1,3 +1,8 @@
+/*
+ * Controleur des options du fanfaron connecte.
+ * Il affiche les pupitres et commissions disponibles, preselectionne ceux
+ * de l'utilisateur et remplace ses choix lors de l'enregistrement.
+ */
 package com.example.fanfarehub.servlet;
 
 import com.example.fanfarehub.Model.DAOFactory;

@@ -1,3 +1,8 @@
+/*
+ * Controleur POST d'inscription a un evenement.
+ * Il inscrit, met a jour ou desinscrit l'utilisateur connecte,
+ * puis revient sur la page de detail de l'evenement.
+ */
 package com.example.fanfarehub.servlet;
 
 import com.example.fanfarehub.Model.DAOFactory;

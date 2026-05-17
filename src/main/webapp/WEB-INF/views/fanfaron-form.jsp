@@ -1,3 +1,8 @@
+<%--
+  Formulaire d'administration d'un fanfaron.
+  Il sert a creer ou modifier un membre, son profil, son role,
+  son mot de passe optionnel, ses instruments et ses commissions.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.example.fanfarehub.Model.POJO.*,java.util.List" %>
 <%

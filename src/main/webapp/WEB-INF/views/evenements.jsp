@@ -1,3 +1,8 @@
+<%--
+  Vue de liste des evenements.
+  Elle affiche les evenements filtres ou complets, permet la consultation,
+  et montre les actions de gestion lorsque l'utilisateur y est autorise.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.example.fanfarehub.Model.POJO.*,java.util.List,java.text.SimpleDateFormat" %>
 <% request.setAttribute("pageTitle", "Evenements"); %>

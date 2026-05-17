@@ -1,3 +1,8 @@
+/*
+ * DAO de l'association entre fanfarons et pupitres.
+ * Il ajoute, supprime ou remplace en transaction tous les instruments
+ * joues par un membre.
+ */
 package com.example.fanfarehub.Model.DAO;
 
 import com.example.fanfarehub.Model.*;

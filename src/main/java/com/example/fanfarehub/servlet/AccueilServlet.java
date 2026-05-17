@@ -1,3 +1,8 @@
+/*
+ * Controleur de la page d'accueil connectee.
+ * Il recupere l'utilisateur en session, charge les evenements, ses pupitres
+ * et ses commissions, puis transmet ces donnees a la vue d'accueil.
+ */
 package com.example.fanfarehub.servlet;
 
 import com.example.fanfarehub.Model.DAOFactory;

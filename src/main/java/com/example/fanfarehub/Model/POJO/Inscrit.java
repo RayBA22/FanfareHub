@@ -1,3 +1,8 @@
+/*
+ * Modele d'inscription d'un fanfaron a un evenement.
+ * Il relie un pseudo a un evenement, avec l'instrument choisi
+ * et le statut de participation annonce.
+ */
 package com.example.fanfarehub.Model.POJO;
 
 public class Inscrit {

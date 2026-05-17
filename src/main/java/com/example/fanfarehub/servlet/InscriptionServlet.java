@@ -1,3 +1,8 @@
+/*
+ * Controleur d'inscription des nouveaux fanfarons.
+ * Il affiche les choix de pupitres et commissions, valide les champs,
+ * cree le compte puis enregistre les associations choisies.
+ */
 package com.example.fanfarehub.servlet;
 
 import com.example.fanfarehub.Model.DAOFactory;

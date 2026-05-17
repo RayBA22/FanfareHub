@@ -1,3 +1,8 @@
+/*
+ * Controleur d'administration des fanfarons.
+ * Il permet a l'admin d'ajouter, modifier ou supprimer un membre,
+ * ainsi que de mettre a jour ses instruments, commissions, role et mot de passe.
+ */
 package com.example.fanfarehub.servlet;
 
 import com.example.fanfarehub.Model.DAOFactory;

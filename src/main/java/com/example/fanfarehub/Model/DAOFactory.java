@@ -1,3 +1,8 @@
+/*
+ * Fabrique centralisee des DAO de l'application.
+ * Elle reutilise le gestionnaire de connexion unique et fournit aux servlets
+ * les objets d'acces aux donnees necessaires au modele.
+ */
 package com.example.fanfarehub.Model;
 
 import com.example.fanfarehub.Model.DAO.*;

@@ -1,3 +1,8 @@
+/*
+ * Modele simple d'une commission.
+ * Il porte le nom de la commission utilisee dans les listes, les formulaires
+ * et les associations avec les fanfarons.
+ */
 package com.example.fanfarehub.Model.POJO;
 
 public class Comission {

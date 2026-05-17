@@ -1,3 +1,8 @@
+/*
+ * Filtre global d'authentification.
+ * Il laisse passer les pages publiques et les ressources CSS, puis verifie
+ * qu'un utilisateur est present en session avant d'autoriser les pages privees.
+ */
 package com.example.fanfarehub.filter;
 
 import jakarta.servlet.*;

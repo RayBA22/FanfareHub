@@ -1,3 +1,8 @@
+<%--
+  Vue des options personnelles du fanfaron connecte.
+  Elle affiche tous les pupitres et commissions, pre-coche les choix actuels
+  et permet d'enregistrer une nouvelle selection.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.example.fanfarehub.Model.POJO.*,java.util.List" %>
 <% request.setAttribute("pageTitle", "Mes options"); %>

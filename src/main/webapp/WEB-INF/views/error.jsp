@@ -1,3 +1,8 @@
+<%--
+  Vue generique d'erreur applicative.
+  Elle affiche le message fourni par la servlet, ou un message par defaut,
+  et propose un retour vers l'accueil.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <% request.setAttribute("pageTitle", "Erreur"); %>
 <%@ include file="fragments/header.jsp" %>

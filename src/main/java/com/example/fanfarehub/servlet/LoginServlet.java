@@ -1,3 +1,8 @@
+/*
+ * Controleur de connexion.
+ * Il affiche le formulaire, authentifie le fanfaron, met a jour sa derniere
+ * connexion et initialise la session avec ses droits de gestion.
+ */
 package com.example.fanfarehub.servlet;
 
 import com.example.fanfarehub.Model.DAOFactory;

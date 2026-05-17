@@ -1,3 +1,8 @@
+<%--
+  Vue publique de connexion.
+  Elle affiche le formulaire d'authentification, les erreurs de login
+  et un lien vers l'inscription pour les nouveaux utilisateurs.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="fr">

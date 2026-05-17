@@ -1,3 +1,8 @@
+<%--
+  Formulaire de creation ou modification d'un evenement.
+  Il adapte ses champs au mode ajoute/modifie et envoie les donnees
+  a EvenementGestionServlet pour validation et persistance.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.example.fanfarehub.Model.POJO.Evenement,java.text.SimpleDateFormat" %>
 <%
@@ -49,7 +54,7 @@
             </div>
             <div class="form-group">
                 <label for="date">Date</label>
-                <input type="date" id="date" name="date"
+                <input type="date" id="date" name="date" required
                        value="<%= ev != null && ev.getDate() != null ? sdf.format(ev.getDate()) : "" %>">
             </div>
         </div>

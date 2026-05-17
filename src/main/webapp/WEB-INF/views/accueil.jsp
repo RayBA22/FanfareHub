@@ -1,3 +1,8 @@
+<%--
+  Vue d'accueil de l'utilisateur connecte.
+  Elle affiche le resume du profil, les instruments, les commissions
+  et un apercu des prochains evenements charges par AccueilServlet.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.example.fanfarehub.Model.POJO.*,java.util.List,java.text.SimpleDateFormat" %>
 <% request.setAttribute("pageTitle", "Accueil"); %>

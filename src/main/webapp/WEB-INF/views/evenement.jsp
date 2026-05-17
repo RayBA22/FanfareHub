@@ -1,3 +1,8 @@
+<%--
+  Vue detaillee d'un evenement.
+  Elle affiche les informations, les participants, l'inscription courante
+  et les actions de gestion ou d'inscription selon le contexte utilisateur.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.example.fanfarehub.Model.POJO.*,java.util.List,java.text.SimpleDateFormat" %>
 <%

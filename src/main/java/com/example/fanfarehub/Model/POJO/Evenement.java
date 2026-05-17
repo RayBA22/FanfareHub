@@ -1,3 +1,8 @@
+/*
+ * Modele d'un evenement de la fanfare.
+ * Il regroupe son identite, son type, sa date, sa duree, son lieu,
+ * sa description et le pseudo de l'organisateur.
+ */
 package com.example.fanfarehub.Model.POJO;
 
 import java.util.Date;

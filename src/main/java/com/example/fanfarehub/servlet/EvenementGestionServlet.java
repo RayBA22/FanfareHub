@@ -1,3 +1,8 @@
+/*
+ * Controleur de gestion des evenements.
+ * Il reserve l'ajout, la modification et la suppression aux administrateurs
+ * ou membres de la commission Prestation, puis redirige vers les vues adaptees.
+ */
 package com.example.fanfarehub.servlet;
 
 import com.example.fanfarehub.Model.DAOFactory;

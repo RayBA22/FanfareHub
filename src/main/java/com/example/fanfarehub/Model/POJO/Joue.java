@@ -1,3 +1,7 @@
+/*
+ * Modele d'association entre un fanfaron et un instrument.
+ * Il represente un pupitre joue par un membre dans la table de liaison.
+ */
 package com.example.fanfarehub.Model.POJO;
 
 public class Joue {

@@ -1,3 +1,8 @@
+/*
+ * DAO des commissions.
+ * Il lit la liste complete des commissions et recupere les commissions
+ * rattachees a un fanfaron via la table de participation.
+ */
 package com.example.fanfarehub.Model.DAO;
 
 import com.example.fanfarehub.Model.*;

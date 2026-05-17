@@ -1,3 +1,8 @@
+/*
+ * Controleur du detail d'un evenement.
+ * Il charge l'evenement demande, la liste des inscrits, l'inscription
+ * de l'utilisateur courant et ses instruments disponibles.
+ */
 package com.example.fanfarehub.servlet;
 
 import com.example.fanfarehub.Model.DAOFactory;

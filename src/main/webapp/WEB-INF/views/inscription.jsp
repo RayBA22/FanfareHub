@@ -1,3 +1,8 @@
+<%--
+  Vue publique de creation de compte.
+  Elle recueille l'identite, les identifiants, les preferences alimentaires,
+  les instruments et les commissions avant envoi a InscriptionServlet.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.example.fanfarehub.Model.POJO.*,java.util.List" %>
 <!DOCTYPE html>

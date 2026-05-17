@@ -1,3 +1,8 @@
+/*
+ * Gestionnaire singleton des connexions PostgreSQL.
+ * Il charge le driver JDBC et ouvre des connexions vers la base fanfdb
+ * avec les identifiants configures pour les DAO.
+ */
 package com.example.fanfarehub.Model;
 
 import java.sql.*;

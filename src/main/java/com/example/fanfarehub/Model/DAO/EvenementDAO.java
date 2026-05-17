@@ -1,3 +1,8 @@
+/*
+ * DAO des evenements.
+ * Il cree, recherche, liste, filtre, met a jour et supprime les evenements,
+ * puis transforme chaque ligne SQL en objet Evenement.
+ */
 package com.example.fanfarehub.Model.DAO;
 
 import com.example.fanfarehub.Model.*;

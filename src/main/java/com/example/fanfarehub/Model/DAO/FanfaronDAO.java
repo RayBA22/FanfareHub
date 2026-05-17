@@ -1,3 +1,8 @@
+/*
+ * DAO des fanfarons.
+ * Il gere la creation, l'authentification, la consultation, la mise a jour,
+ * la suppression et les controles d'unicite des membres.
+ */
 package com.example.fanfarehub.Model.DAO;
 
 import com.example.fanfarehub.Model.*;

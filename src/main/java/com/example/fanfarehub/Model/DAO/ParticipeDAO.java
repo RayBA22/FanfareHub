@@ -1,3 +1,8 @@
+/*
+ * DAO de l'association entre fanfarons et commissions.
+ * Il ajoute, supprime ou remplace en transaction toutes les commissions
+ * auxquelles un membre participe.
+ */
 package com.example.fanfarehub.Model.DAO;
 
 import com.example.fanfarehub.Model.*;

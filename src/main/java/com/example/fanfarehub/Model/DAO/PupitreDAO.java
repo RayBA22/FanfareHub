@@ -1,3 +1,8 @@
+/*
+ * DAO des pupitres.
+ * Il charge tous les instruments disponibles et ceux associes a un fanfaron
+ * via la table des instruments joues.
+ */
 package com.example.fanfarehub.Model.DAO;
 
 import com.example.fanfarehub.Model.*;
